@@ -1,0 +1,87 @@
+#include<iostream>
+#include<iomanip>
+#include<algorithm>
+#include <ctime>
+#include <chrono>
+
+using namespace std;
+
+int changeletters(string &s, char original, char changeto)
+{
+    int numChange = 0;
+    if (s.find(original) != std::string::npos)
+    {
+        for (int x = 0 ; x < s.length(); x ++)
+        {
+            if(s[x] == original)
+            {
+                s[x] = changeto;
+                numChange ++;
+            }
+        }
+    }
+    return numChange;
+}
+
+int findString(string &s, string find)
+{
+    int numChange = 0;
+    size_t a = 0;
+    do
+    {
+        if (s.find(find, a) != string::npos)
+            {
+                size_t x = s.find(find, a);
+                a = x + 1;
+                numChange ++;
+            }
+    }while (s.find(find, a) != string::npos);
+   
+    return numChange;
+}
+
+void HelloWorld()
+{
+    cout << " Hello World!!" << endl;
+}
+int main()
+{
+    string example = "Mississippi";
+    int a = changeletters(example, 'i', 'p');
+    cout << a << endl;
+   string s = R"XXX( whatever string string string string string )XXX";
+   int b = findString( s , "string");
+    cout << b << endl;
+    
+    // comments on pointers
+    
+   // void* pointer = NULL;
+    
+    int var = 8;
+    cout << " this is var : " << var << endl;
+    int* ptr = &var;
+    *ptr = 0;
+    cout << " this is var after change: " << var << endl;
+    cout << " this is ptr : " << ptr << endl;
+    cout << " this is *ptr : " << *ptr << endl;
+    
+    char* buffer = new char[8];   // heap alocated data reserved 8 bits at the begining of pointer "buffer"
+    memset(buffer, 0, 8);
+    
+    char** ptr2 = &buffer; //this is a double pointer
+    
+    delete [] buffer;  // cleans memory
+    
+    // Function Pointers
+    
+    auto function = &HelloWorld; // var function is stoing the momory address of the function HelloWorld
+   // the reall type "auto" --> void (*function)();
+    
+    function();
+    
+    system ("pause");
+    return 0;
+}
+
+
+
